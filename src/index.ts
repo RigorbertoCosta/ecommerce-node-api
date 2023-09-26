@@ -1,53 +1,45 @@
-import { readFile, writeFile } from "fs";
 import { Categoria } from "@modules/catalogo/domain/categoria/categoria.entity";
-import { RecuperarCategoriaProps } from "./modules/catalogo/domain/categoria/categoria.types";
-import { CategoriaMap } from "@modules/catalogo/mappers/categoria.map";
+import { PrismaClient } from "@prisma/client";
 import { DomainException } from "@shared/domain/domain.exception";
+import { error } from "console";
 
-try {
+const prisma = new PrismaClient();
 
+async function main() {
 
+    //Criar Categoria
     let categoria: Categoria;
     categoria = Categoria.criar({nome:'mesa'});
-    console.log(categoria);
 
+    //Persistir Categoria no Banco
+    await prisma.categoria.create({
+        data: {
+            id:categoria.id,
+            nome: categoria.nome
+        }
+    })
 
-    let propsCategoria: RecuperarCategoriaProps = {
-        id:'6ad12850-abe4-49fe-967e-ab915cce9b3a',
-        nome: 'cama'
-    };
-    let categoria2: Categoria = Categoria.recuperar(propsCategoria);
-    console.log(categoria2);
-
-
-    let arrayCategorias = [];
-    arrayCategorias.push(categoria.toDTO());
-	arrayCategorias.push(categoria2.toDTO());
+    //Listar Categoria
+    const ListaCategorias = await prisma.categoria.findMany();
+    console.log(ListaCategorias);
     
-    writeFile('categorias.json', JSON.stringify(arrayCategorias), function (error:any) {
-        if (error) throw error;
-        console.log('Arquivo Salvo com Sucesso!');
-        readFile('categorias.json', (error, dadoGravadoArquivo) => {
-            if (error) throw error;
-            console.log('Leitura de Arquivo!');
-            let categoriasSalvas: [] = JSON.parse(dadoGravadoArquivo.toString());
-            categoriasSalvas.forEach(categoriaJSON => {
-                console.log(categoriaJSON);
-                console.log(CategoriaMap.toDomain(categoriaJSON));
-            })
-        });
-    });
-} 
-catch (error:any) {
-    if (error instanceof DomainException) {
-        console.log('Execeção de Dóminio');
-        console.log(error.message);
-    }
-    else {
-        console.log('Outras Exceções');
-        console.log(error.message);
-    }
 }
-finally {
-    console.log('Ação que deve ser executada em caso de sucesso e em caso de exceção');
-}
+
+main()
+    .then(async () => {
+      await prisma.$disconnect  
+    })
+    .catch(async (error) =>{
+        if (error instanceof DomainException) {
+            console.log('Exceção do Dóminio');
+            console.log(error.message);
+        }
+        else {
+            console.log('Outras Exceções');
+            console.log(error.message);
+        }  
+        await prisma.$disconnect()
+        process.exit(1) 
+        
+    })
+    
