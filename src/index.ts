@@ -1,30 +1,63 @@
 import { Categoria } from "@modules/catalogo/domain/categoria/categoria.entity";
+import { CategoriaPrismaRepository } from "@modules/catalogo/infra/database/categoria.prisma.repository";
 import { PrismaClient } from "@prisma/client";
 import { DomainException } from "@shared/domain/domain.exception";
-import { error } from "console";
+import { error, info, log } from "console";
 
-const prisma = new PrismaClient();
-
-async function main() {
-
-    //Criar Categoria
-    let categoria: Categoria;
-    categoria = Categoria.criar({nome:'mesa'});
-
-    //Persistir Categoria no Banco
-    await prisma.categoria.create({
-        data: {
-            id:categoria.id,
-            nome: categoria.nome
-        }
-    })
-
-    //Listar Categoria
-    const ListaCategorias = await prisma.categoria.findMany();
-    console.log(ListaCategorias);
+const prisma = new PrismaClient({
+    log: ['query', 'info'],
+    errorFormat: 'pretty'
+});
     
-}
+async function main() {
+    prisma.$connect().then(
+        async () => {
+            console.log('Postgres Conectado');
+        }
+    );
+    const categoriaRepo = new CategoriaPrismaRepository (prisma);
 
+        //// recuperar por uuid ////
+
+    //const categoriaRecuperada: Categoria | null = await categoriaRepo.recuperarPorUuid("7061d599-ab25-4182-98ce-170afdf2acd2");
+
+    //console.log(categoriaRecuperada);
+
+        //// recuperar todas as categorias ////
+
+    //const todasCategorias: Array<Categoria> = await categoriaRepo.recuperarTodos();
+    //console.log(todasCategorias);
+
+
+        ////verifica se existe categoria////
+    
+    //const existeCategoria: boolean = await categoriaRepo.existe("092c7771-3a08-4ef8-8456-80c0f4656372")
+    //console.log(existeCategoria);
+
+        //// inserir categoria  ////
+
+    //const categoria: Categoria = Categoria.criar({
+    //    nome: 'Sala e Quarto'
+    //})
+    //const categoriaInserida = await categoriaRepo.inserir(categoria);
+    //console.log(categoriaInserida);
+
+        //// atualizar categoria  ////
+
+    //const categoria: Categoria = Categoria.recuperar({
+    //    id: "092c7771-3a08-4ef8-8456-80c0f4656372",
+    //    nome: 'Mesa'
+    //});
+    //const atualizouCategoria: boolean = await categoriaRepo.atualizar(categoria.id,categoria);
+    //console.log(atualizouCategoria)
+
+        //// deletar categoria ////
+    
+    //const categoriaDeletada: boolean = await categoriaRepo.deletar("e6b68d1a-fc14-4460-ae83-81c1fbc827fc")
+    //console.log(categoriaDeletada);
+}  
+
+    
 main()
     .then(async () => {
       await prisma.$disconnect  
