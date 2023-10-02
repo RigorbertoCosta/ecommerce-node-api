@@ -1,5 +1,6 @@
 import { Categoria } from "@modules/catalogo/domain/categoria/categoria.entity";
 import { CategoriaPrismaRepository } from "@modules/catalogo/infra/database/categoria.prisma.repository";
+import { ProdutoPrismaRepository } from "@modules/catalogo/infra/database/produto.prisma.repository";
 import { PrismaClient } from "@prisma/client";
 import { DomainException } from "@shared/domain/domain.exception";
 import { error, info, log } from "console";
@@ -16,6 +17,7 @@ async function main() {
         }
     );
     const categoriaRepo = new CategoriaPrismaRepository (prisma);
+    const produtoRepo = new ProdutoPrismaRepository (prisma);
 
         //// recuperar por uuid ////
 
