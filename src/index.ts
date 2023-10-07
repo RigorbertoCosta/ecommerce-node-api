@@ -4,60 +4,192 @@ import { ProdutoPrismaRepository } from "@modules/catalogo/infra/database/produt
 import { PrismaClient } from "@prisma/client";
 import { DomainException } from "@shared/domain/domain.exception";
 import { error, info, log } from "console";
+import { Produto } from "@modules/catalogo/domain/produto/produto.enitity";
 
 const prisma = new PrismaClient({
     log: ['query', 'info'],
     errorFormat: 'pretty'
 });
-    
+
 async function main() {
+    
     prisma.$connect().then(
         async () => {
             console.log('Postgres Conectado');
         }
     );
-    const categoriaRepo = new CategoriaPrismaRepository (prisma);
-    const produtoRepo = new ProdutoPrismaRepository (prisma);
 
-        //// recuperar por uuid ////
+    const categoriaRepo = new CategoriaPrismaRepository(prisma);
+    const produtoRepo = new ProdutoPrismaRepository(prisma);
 
-    //const categoriaRecuperada: Categoria | null = await categoriaRepo.recuperarPorUuid("7061d599-ab25-4182-98ce-170afdf2acd2");
+    ////////////////////////////////
+    //Recuperar Categoria por UUID//
+    ////////////////////////////////
+    
+    //const categoriaRecuperada: Categoria | null = await categoriaRepo.recuperarPorUuid('5ccdd6ab-d043-42f0-937b-1260fe47886a');
 
     //console.log(categoriaRecuperada);
 
-        //// recuperar todas as categorias ////
-
+    /////////////////////////////////
+    //Recuperar Todas as Categorias//
+    /////////////////////////////////
+    
     //const todasCategorias: Array<Categoria> = await categoriaRepo.recuperarTodos();
+
     //console.log(todasCategorias);
 
-
-        ////verifica se existe categoria////
+    ////////////////////////////////
+    //Verifica se Existe Categoria//
+    ////////////////////////////////
     
-    //const existeCategoria: boolean = await categoriaRepo.existe("092c7771-3a08-4ef8-8456-80c0f4656372")
+    //const existeCategoria: boolean = await categoriaRepo.existe("7061d559-ab25-4182-98ce-170afdf2acd2");
+
     //console.log(existeCategoria);
 
-        //// inserir categoria  ////
-
+    /////////////////////
+    //Inserir Categoria//
+    /////////////////////
+    
     //const categoria: Categoria = Categoria.criar({
-    //    nome: 'Sala e Quarto'
-    //})
+    //    nome:'Cozinha'
+    //});     
+
     //const categoriaInserida = await categoriaRepo.inserir(categoria);
+
     //console.log(categoriaInserida);
 
-        //// atualizar categoria  ////
-
+    ///////////////////////
+    //Atualizar Categoria//
+    ///////////////////////
+    
     //const categoria: Categoria = Categoria.recuperar({
-    //    id: "092c7771-3a08-4ef8-8456-80c0f4656372",
-    //    nome: 'Mesa'
-    //});
-    //const atualizouCategoria: boolean = await categoriaRepo.atualizar(categoria.id,categoria);
+    //    id: "5ccdd6ab-d043-42f0-937b-1260fe47886a",
+    //    nome: "Cozinha Americana"
+    //});     
+
+   //const atualizouCategoria: boolean = await categoriaRepo.atualizar(categoria.id,categoria);
+
     //console.log(atualizouCategoria)
 
-        //// deletar categoria ////
+    /////////////////////
+    //Deletar Categoria//
+    /////////////////////
     
-    //const categoriaDeletada: boolean = await categoriaRepo.deletar("e6b68d1a-fc14-4460-ae83-81c1fbc827fc")
+    //const categoriaDeletada: boolean = await categoriaRepo.deletar('5ccdd6ab-d043-42f0-937b-1260fe47886a');
+    
     //console.log(categoriaDeletada);
-}  
+
+    ////////////////////////////////
+	//Recuperar Produto por UUID//
+	////////////////////////////////
+		
+	//const produtoRecuperado: Produto | null = await produtoRepo.recuperarPorUuid("7f35c7f4-ce26-4503-bfce-0afd937adfb8");
+
+	//console.log(produtoRecuperado);
+
+    //console.log(produtoRecuperado?.estaDeletado());
+
+    ///////////////////
+	//Inserir Produto//
+	///////////////////
+	/*
+    
+    const categoria01: Categoria = Categoria.recuperar({
+        id: "03f890b0-684a-44ba-a887-170e26bb2cd2",
+        nome: 'Cozinha'
+    });     
+
+    const categoria02: Categoria = Categoria.recuperar({
+        id: "fc762da1-8d2c-4ffa-9559-901db94cb92e",
+        nome: 'Banho'
+    })
+
+    const produto: Produto = Produto.criar({
+        nome:'Pano de Pratro',
+        descricao:'Algodão fio 60',
+        valor:30,
+        categorias:[categoria01]
+    });
+
+	const produtoInserido = await produtoRepo.inserir(produto);
+
+	console.log(produtoInserido);
+    */
+
+    
+
+    /////////////////////////////////////////////////
+	//Recuperar Todos os Produtos e Suas Categorias//
+	/////////////////////////////////////////////////
+		
+	//const todosProdutos: Array<Produto> = await produtoRepo.recuperarTodos();
+
+	//console.log(todosProdutos);
+
+    ///////////////////////////////////////////////
+	//Atualizar Produto - Sem Atulizar Categorias//
+	///////////////////////////////////////////////
+
+    /*
+    const produto = {
+        id: "7d6a14d5-02f3-4b6d-8cb8-8601ff151f10",
+        nome: "Toalha de Cozinha",
+        descricao: "toalha de algodão",
+        valor: 200
+    }; 
+
+    const atualizouProduto: boolean = await produtoRepo.atualizar(produto.id,produto);
+    
+    */
+    ///////////////////
+	//Deletar Produto//
+	///////////////////
+		
+	//const produtoDeletado: boolean = await produtoRepo.deletar("7d6a14d5-02f3-4b6d-8cb8-8601ff151f10");
+
+	//console.log(produtoDeletado);
+
+    ////////////////////////////////////////////
+	//Adicionar e Remover Categoria ao Produto//
+	////////////////////////////////////////////
+    
+    //const produtoRecuperado: Produto | null = await produtoRepo.recuperarPorUuid("737f111b-eba1-457f-9552-5b5f28511d5d");
+
+    //const categoriaRecuperada: Categoria | null = await categoriaRepo.recuperarPorUuid("03f890b0-684a-44ba-a887-170e26bb2cd2");
+
+    //if (produtoRecuperado && categoriaRecuperada){
+
+        //if (produtoRecuperado.adicionarCategoria(categoriaRecuperada)) {
+        //    await produtoRepo.adicionarCategoria(produtoRecuperado,categoriaRecuperada);
+        //}
+
+       //if (produtoRecuperado.removerCategoria(categoriaRecuperada)) {
+        //    await produtoRepo.removerCategoria(produtoRecuperado,categoriaRecuperada);
+        //}
+
+    //}
+
+    //////////////////////////
+    //Alterar Status Produto//
+    //////////////////////////
+
+    //const produtoRecuperado: Produto | null = await produtoRepo.recuperarPorUuid("ace8780f-1aac-4219-9b36-e13b60159e4b");
+
+    //if (produtoRecuperado) {
+    //    const alterouStatusProduto: boolean = await produtoRepo.alterarStatus(produtoRecuperado,StatusProduto.ATIVO)
+    //    console.log(alterouStatusProduto);
+    //}
+
+    ////////////////////////////////////
+	//Recuperar Produtos por Categoria//
+	////////////////////////////////////
+			
+	//const todosProdutosPorCategoria: Array<Produto> = await produtoRepo.recuperarPorCategoria("03f890b0-684a-44ba-a887-170e26bb2cd2");
+
+	//console.log(todosProdutosPorCategoria);
+    
+
+}
 
     
 main()

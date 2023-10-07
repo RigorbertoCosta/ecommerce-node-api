@@ -1,6 +1,8 @@
+import { IDatasControle, KeysDatasControles } from "@shared/domain/datas.types";
 import { Categoria } from "../categoria/categoria.entity";
+import { ICategoria } from "../categoria/categoria.types";
 
-interface IProduto {
+interface IProduto extends IDatasControle{
     id?: string;
     nome:string;
     descricao:string;
@@ -8,9 +10,11 @@ interface IProduto {
     categorias: Array<Categoria>
 }
 
-type CriarProdutoProps = Omit<IProduto, "id">;
+type CriarProdutoProps = Omit<IProduto, "id" | KeysDatasControles>;
 
-type RecuperarProdutoProps = Required<IProduto>;
+type RecuperarProdutoProps = IProduto & {
+    id: NonNullable<IProduto['id']>
+};
 
 export {
     IProduto, 

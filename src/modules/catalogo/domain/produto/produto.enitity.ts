@@ -10,6 +10,10 @@ class Produto extends Entity<IProduto> implements IProduto {
     private _descricao: string;
     private _valor: number;
     private _categorias: Array<Categoria>;
+    private _dataCriacao?: Date | undefined;
+    private _dataAtualizacao?: Date | undefined;
+    private _dataExclusao?: Date | null | undefined;
+    
 
 
     public get nome(): string {
@@ -75,13 +79,34 @@ class Produto extends Entity<IProduto> implements IProduto {
 
         this._categorias = value;
     }
-    
+    public get dataCriacao(): Date | undefined {
+        return this._dataCriacao;
+    }
+    private set dataCriacao(value: Date | undefined) {
+        this._dataCriacao = value;
+    }
+    public get dataAtualizacao(): Date | undefined {
+        return this._dataAtualizacao;
+    }
+    private set dataAtualizacao(value: Date | undefined) {
+        this._dataAtualizacao = value;
+    }
+    public get dataExclusao(): Date | null | undefined {
+        return this._dataExclusao;
+    }
+    private set dataExclusao(value: Date | null | undefined) {
+        this._dataExclusao = value;
+    }
+
     private constructor(produto:IProduto){
         super(produto.id);
         this.nome = produto.nome;
         this.descricao = produto.descricao;
         this.valor = produto.valor;
         this.categorias = produto.categorias;
+        this.dataCriacao = produto.dataCriacao;
+        this.dataAtualizacao = produto.dataAtualizacao;
+        this.dataExclusao = produto.dataExclusao;
     }
 
     public static criar(props: CriarProdutoProps): Produto {
@@ -91,11 +116,15 @@ class Produto extends Entity<IProduto> implements IProduto {
     public static recuperar(props: RecuperarProdutoProps): Produto {
         return new Produto(props);
     }
+    
 
     public toDTO(): IProduto {
         return ProdutoMap.toDTO(this);
     }
-
+    
+    public estaDeletado(): boolean {
+        return this.dataExclusao !== null ? true : false
+    }
 
 }
 
