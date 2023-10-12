@@ -1,6 +1,6 @@
 import { Categoria } from "@modules/catalogo/domain/categoria/categoria.entity";
 import { ICategoriaRepository } from "@modules/catalogo/domain/categoria/categoria.repository.interface";
-import { CategoriaMap } from "@modules/catalogo/mappers/categoria.map";
+import { CategoriaMap } from "@modules/catalogo/infra/mappers/categoria.map";
 import { PrismaRepository } from "@shared/infra/database/prisma.repository";
 
 class CategoriaPrismaRepository extends PrismaRepository implements ICategoriaRepository<Categoria> {
@@ -21,12 +21,7 @@ class CategoriaPrismaRepository extends PrismaRepository implements ICategoriaRe
     async recuperarTodos(): Promise<Array<Categoria>> {
         const categoriasRecuperadas = await this._datasource.categoria.findMany();
         const categorias = categoriasRecuperadas.map(
-            (categoria) => CategoriaMap.toDomain(
-                {
-                    id: categoria.id,
-                    nome: categoria.nome
-                }
-            )
+            (categoria) => CategoriaMap.toDomain(categoria)
         );
         return categorias;
     }

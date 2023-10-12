@@ -1,5 +1,4 @@
 import { IDatasControle, KeysDatasControles } from "@shared/domain/datas.types";
-import { Categoria } from "../categoria/categoria.entity";
 import { ICategoria } from "../categoria/categoria.types";
 
 enum StatusProduto{
@@ -12,7 +11,7 @@ interface IProduto extends IDatasControle{
     nome:string;
     descricao:string;
     valor: number;
-    categorias: Array<Categoria>;
+    categorias: Array<ICategoria>;
     status?: StatusProduto
 }
 
