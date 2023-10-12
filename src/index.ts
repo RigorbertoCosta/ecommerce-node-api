@@ -51,7 +51,7 @@ async function main() {
     /////////////////////
     
     //const categoria: Categoria = Categoria.criar({
-    //    nome:'Cozinha'
+    //    nome:'Banheiro'
     //});     
 
     //const categoriaInserida = await categoriaRepo.inserir(categoria);
@@ -92,10 +92,10 @@ async function main() {
     ///////////////////
 	//Inserir Produto//
 	///////////////////
-	/*
-    
+	
+    /*
     const categoria01: Categoria = Categoria.recuperar({
-        id: "03f890b0-684a-44ba-a887-170e26bb2cd2",
+        id: "00d8c8a4-7afb-4aa9-9a0f-8f005b5a2816",
         nome: 'Cozinha'
     });     
 
@@ -105,7 +105,7 @@ async function main() {
     })
 
     const produto: Produto = Produto.criar({
-        nome:'Pano de Pratro',
+        nome:'Pano de Prato',
         descricao:'Algodão fio 60',
         valor:30,
         categorias:[categoria01]

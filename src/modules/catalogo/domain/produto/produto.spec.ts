@@ -20,6 +20,10 @@ let UUUIDValido: string;
 let categoriasQtdValidaAptaAdicao: Array<Categoria>;
 let categoriasQtdMaxValidaInaptaAdicao: Array<Categoria>;
 let categoriasQtdValidaInaptaAdicaoDuplicacao: Array<Categoria>;
+let categoriasQtdValidaAptaRemocao: Array<Categoria>;
+let categoriasQtdMinValidaInaptaRemocao: Array<Categoria>;
+let categoriasQtdValidaInaptaRemocaoNaoAssociada: Array<Categoria>;
+
 
 beforeAll(async () => {
 
@@ -41,10 +45,12 @@ beforeAll(async () => {
     categoriasValidas = faker.helpers.arrayElements<Categoria>([categoriaValida01,categoriaValida02,categoriaValida03], {min:1,max:3});
     categoriasQtdMinInvalidas = [];
     categoriasQtdMaxInvalidas = faker.helpers.arrayElements<Categoria>([categoriaValida01,categoriaValida02,categoriaValida03,categoriaValida04], { min: 4, max: 4});
-    categoriasQtdValidaAptaAdicao = faker.helpers.arrayElements<Categoria>([categoriaValida01, categoriaValida02], {min: 1, max:3});
-    categoriasQtdMaxValidaInaptaAdicao = faker.helpers.arrayElements<Categoria>([categoriaValida01, categoriaValida02, categoriaValida03], {min: 1, max:3});
+    categoriasQtdValidaAptaAdicao = faker.helpers.arrayElements<Categoria>([categoriaValida01, categoriaValida02], {min: 1, max:2});
+    categoriasQtdMaxValidaInaptaAdicao = faker.helpers.arrayElements<Categoria>([categoriaValida01, categoriaValida02, categoriaValida03], {min: 3, max:3});
     categoriasQtdValidaInaptaAdicaoDuplicacao = faker.helpers.arrayElements<Categoria>([categoriaValida01, categoriaValida02], {min: 1, max:2});
-    
+    categoriasQtdValidaAptaRemocao = faker.helpers.arrayElements<Categoria>([categoriaValida01, categoriaValida02, categoriaValida03], {min:2, max: 3 });
+    categoriasQtdMinValidaInaptaRemocao = faker.helpers.arrayElements<Categoria>([categoriaValida01], {min: 1, max: 1});
+    categoriasQtdValidaInaptaRemocaoNaoAssociada = faker.helpers.arrayElements<Categoria>([categoriaValida01, categoriaValida02, categoriaValida03], {min: 2, max:3});
     ///Preenche UUID Válido para Produto///
     UUUIDValido= faker.string.uuid();
 });
@@ -202,4 +208,76 @@ describe('Entidade de Domínio: Adicionar Categoria ao Produto', () => {
         expect(() => produtoValidoInaptoNovaCategoria.adicionarCategoria(categoriaValida))
             .toThrowError(ProdutoExceptions.ProdutoJaPossuiQtdMaximaCategorias);
     });
+
+    test('Não Deve Adiocionar Uma Categoria Válida a Um Produto Válido a Ter Uma Nova Categoria - Categoria Já Adicionada', async() =>{
+        const produtoValidoInaptoNovaCategoria: Produto = Produto.recuperar({
+            id: UUUIDValido,
+            nome: nomeProdutoValido,
+            descricao: descricaoProdutoValido,
+            valor: valorProdutoValido,
+            categorias: categoriasQtdValidaInaptaAdicaoDuplicacao
+        });
+        const categoriaValida = categoriasQtdValidaInaptaAdicaoDuplicacao[0];
+        
+
+        expect(() => produtoValidoInaptoNovaCategoria.adicionarCategoria(categoriaValida))
+            .toThrowError(ProdutoExceptions.ProdutoJaPossuiCategoriaInformada);
+    });
+});
+
+describe('Entidade de Domínio: Remover Categoria do Produto', () => {
+
+    test('Deve Remover Uma Categoria Válida de um Produto Válido Apto a Ter Uma Categoria Removida', async() => {
+
+        const produtoValidoAptoRemoverCategoria: Produto = Produto.recuperar({
+            id: UUUIDValido,
+            nome: nomeProdutoValido,
+            descricao: descricaoProdutoValido,
+            valor: valorProdutoValido,
+            categorias: categoriasQtdValidaAptaRemocao
+        });
+    
+        const categoriaValida = categoriasQtdValidaAptaRemocao[0];
+    
+        expect(produtoValidoAptoRemoverCategoria.removerCategoria(categoriaValida))
+            .toBe(categoriaValida);
+    
+        expect(produtoValidoAptoRemoverCategoria.categorias)
+            .not.toContain(categoriaValida);
+
+    }); 
+
+    test('Não Deve Remover Uma Categoria Válida de um Produto Válido Inapto a Ter Uma Categoria Removida - Quantidade Mínima de Categorias', async() => {
+
+        const produtoValidoInaptoRemoverCategoria: Produto = Produto.recuperar({
+            id: UUUIDValido,
+            nome: nomeProdutoValido,
+            descricao: descricaoProdutoValido,
+            valor: valorProdutoValido,
+            categorias: categoriasQtdMinValidaInaptaRemocao
+        });
+    
+        const categoriaValida = categoriasQtdMinValidaInaptaRemocao[0];
+    
+        expect(() => produtoValidoInaptoRemoverCategoria.removerCategoria(categoriaValida))
+            .toThrowError(ProdutoExceptions.ProdutoJaPossuiQtdMinimaCategorias);
+
+    }); 
+
+    test('Não Deve Remover Uma Categoria Válida de um Produto Válido Inapto a Ter Uma Categoria Removida - Categoria Não Associada ao Produto', async() => {
+
+        const produtoValidoInaptoRemoverCategoria: Produto = Produto.recuperar({
+            id: UUUIDValido,
+            nome: nomeProdutoValido,
+            descricao: descricaoProdutoValido,
+            valor: valorProdutoValido,
+            categorias: categoriasQtdValidaInaptaRemocaoNaoAssociada
+        });
+    
+        const categoriaValida = Categoria.criar({nome: faker.string.alpha({length: {min: 3, max: 50}})});
+    
+        expect(() => produtoValidoInaptoRemoverCategoria.removerCategoria(categoriaValida))
+            .toThrowError(ProdutoExceptions.ProdutoNaoPossuiCategoriaInformada);
+
+    }); 
 });

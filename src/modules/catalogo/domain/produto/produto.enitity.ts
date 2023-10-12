@@ -2,7 +2,7 @@ import { Entity } from "@shared/domain/entity";
 import { ProdutoMap } from "@modules/catalogo/mappers/produto.maps";
 import { Categoria } from "../categoria/categoria.entity";
 import { ProdutoExceptions } from "./produto.exception";
-import { CriarProdutoProps, IProduto, RecuperarProdutoProps } from "./produto.types";
+import { CriarProdutoProps, IProduto, RecuperarProdutoProps, StatusProduto } from "./produto.types";
 
 class Produto extends Entity<IProduto> implements IProduto {
 
@@ -13,6 +13,8 @@ class Produto extends Entity<IProduto> implements IProduto {
     private _dataCriacao?: Date | undefined;
     private _dataAtualizacao?: Date | undefined;
     private _dataExclusao?: Date | null | undefined;
+    private _status?: StatusProduto | undefined;
+    
 
     ///Constantes///
 
@@ -102,6 +104,12 @@ class Produto extends Entity<IProduto> implements IProduto {
     private set dataExclusao(value: Date | null | undefined) {
         this._dataExclusao = value;
     }
+    public get status(): StatusProduto | undefined {
+        return this._status;
+    }
+    private set status(value: StatusProduto | undefined) {
+        this._status = value;
+    }
 
     private constructor(produto:IProduto){
         super(produto.id);
@@ -112,6 +120,7 @@ class Produto extends Entity<IProduto> implements IProduto {
         this.dataCriacao = produto.dataCriacao;
         this.dataAtualizacao = produto.dataAtualizacao;
         this.dataExclusao = produto.dataExclusao;
+        this.status = produto.status;
     }
 
     public static criar(props: CriarProdutoProps): Produto {
@@ -154,6 +163,23 @@ class Produto extends Entity<IProduto> implements IProduto {
         }
 
         this.categorias.push(categoria);
+        return categoria;
+    }
+
+    public removerCategoria(categoria: Categoria): Categoria{
+        if (this.quantidadeCategorias() <= Produto.QTD_MINIMA_CATEGORIAS) {
+            throw new ProdutoExceptions.ProdutoJaPossuiQtdMinimaCategorias();
+        }
+
+        if (!this.possuiCategoria(categoria)) {
+            throw new ProdutoExceptions.ProdutoNaoPossuiCategoriaInformada();
+        }
+
+        this.categorias.filter((categorriaExistente, index, arrayCategorias) => {
+            if (categorriaExistente.id === categoria.id){
+                arrayCategorias.splice(index, 1)
+            }
+        });
         return categoria;
     }
 

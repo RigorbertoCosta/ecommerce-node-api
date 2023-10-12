@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="9aFSi8XyiYPv80Z2Mk90" name="Visão Geral - Domínio">
-        <mxGraphModel dx="635" dy="788" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+        <mxGraphModel dx="574" dy="792" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -81,7 +81,7 @@
         </mxGraphModel>
     </diagram>
     <diagram id="716YB2Dg7-pcS5Y_QKZl" name="Subdomínio - Catálogo">
-        <mxGraphModel dx="1485" dy="788" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+        <mxGraphModel dx="1531" dy="792" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -260,6 +260,36 @@
                     <mxGeometry width="160" relative="1" as="geometry">
                         <mxPoint x="370" y="545.3214285714286" as="sourcePoint"/>
                         <mxPoint x="311.63750000000005" y="439.70000000000005" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="JoyRXoFWy6SymsM5-6cp-1" value="" style="shape=ellipse;container=1;horizontal=1;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;html=1;dashed=0;collapsible=0;" vertex="1" parent="1">
+                    <mxGeometry x="200" y="600" width="120" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="JoyRXoFWy6SymsM5-6cp-2" value="Remover Categoria" style="html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rotatable=0;" vertex="1" parent="JoyRXoFWy6SymsM5-6cp-1">
+                    <mxGeometry y="19.071428571428573" width="120" height="12.5" as="geometry"/>
+                </mxCell>
+                <mxCell id="JoyRXoFWy6SymsM5-6cp-6" value="&amp;lt;&amp;lt;extend&amp;gt;&amp;gt;" style="html=1;verticalAlign=bottom;labelBackgroundColor=none;endArrow=open;endFill=0;dashed=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="JoyRXoFWy6SymsM5-6cp-1" target="eK-2ITGQcMqE1jckiWE5-1">
+                    <mxGeometry x="0.0064" y="1" width="160" relative="1" as="geometry">
+                        <mxPoint x="280.64" y="601.4714285714284" as="sourcePoint"/>
+                        <mxPoint x="220.00249999999994" y="439.9999999999999" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="250.64" y="516.15"/>
+                        </Array>
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="JoyRXoFWy6SymsM5-6cp-7" value="" style="shape=ellipse;container=1;horizontal=1;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;html=1;dashed=0;collapsible=0;" vertex="1" parent="1">
+                    <mxGeometry x="60" y="590" width="120" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="JoyRXoFWy6SymsM5-6cp-8" value="Alterar Status" style="html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rotatable=0;" vertex="1" parent="JoyRXoFWy6SymsM5-6cp-7">
+                    <mxGeometry y="19.071428571428573" width="120" height="12.5" as="geometry"/>
+                </mxCell>
+                <mxCell id="JoyRXoFWy6SymsM5-6cp-9" value="&amp;lt;&amp;lt;extend&amp;gt;&amp;gt;" style="html=1;verticalAlign=bottom;labelBackgroundColor=none;endArrow=open;endFill=0;dashed=1;entryX=0.262;entryY=1;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="JoyRXoFWy6SymsM5-6cp-7" target="eK-2ITGQcMqE1jckiWE5-1">
+                    <mxGeometry x="-0.0521" y="-2" width="160" relative="1" as="geometry">
+                        <mxPoint x="267.8502526412494" y="610" as="sourcePoint"/>
+                        <mxPoint x="248.75" y="450" as="targetPoint"/>
+                        <Array as="points"/>
+                        <mxPoint y="1" as="offset"/>
                     </mxGeometry>
                 </mxCell>
             </root>
