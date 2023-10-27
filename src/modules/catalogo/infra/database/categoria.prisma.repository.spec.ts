@@ -19,7 +19,7 @@ describe('Repositório Prisma: Categoria', () => {
         categoriaRepositorio = new CategoriaPrismaRepository(prismaMock);
 
         UUUIDValido = faker.string.uuid();
-        nomeCategoriaValido = faker.string.alpha({length:{min: Categoria.TAMANHO_MINIMO_NOME, max: Categoria.TAMANHO_MAXIMO_NOME}});
+        nomeCategoriaValido = faker.string.alpha({ length: { min: Categoria.TAMANHO_MINIMO_NOME, max: Categoria.TAMANHO_MAXIMO_NOME } });
         dataCriacaoCategoria = faker.date.anytime();
         dataAtualizacaoCategoria = faker.date.anytime();
     });
@@ -33,25 +33,25 @@ describe('Repositório Prisma: Categoria', () => {
 
         test('Deve Recuperar Uma Categoria por UUID', async () => {
 
-          const categoriaPrisma = {
-            id: UUUIDValido,
-            nome: nomeCategoriaValido,
-            dataCriacao: dataCriacaoCategoria,
-            dataAtualizacao: dataAtualizacaoCategoria
-          };
+            const categoriaPrisma = {
+                id: UUUIDValido,
+                nome: nomeCategoriaValido,
+                dataCriacao: dataCriacaoCategoria,
+                dataAtualizacao: dataAtualizacaoCategoria
+            };
 
-          prismaMock.categoria.findUnique.mockResolvedValue(categoriaPrisma);
+            prismaMock.categoria.findUnique.mockResolvedValue(categoriaPrisma);
 
-          const categoria: Categoria = CategoriaMap.toDomain(categoriaPrisma);
-          const categoriaRecuperada = await categoriaRepositorio.recuperarPorUuid(categoria.id);
+            const categoria: Categoria = CategoriaMap.toDomain(categoriaPrisma);
+            const categoriaRecuperada = await categoriaRepositorio.recuperarPorUuid(categoria.id);
 
-          expect(categoriaRecuperada).toEqual(categoria);
-          expect(prismaMock.categoria.findUnique).toHaveBeenCalledTimes(1);
-          expect(prismaMock.categoria.findUnique).toBeCalledWith({
-            where: {
-                id: categoria.id
-            }
-          });
+            expect(categoriaRecuperada).toEqual(categoria);
+            expect(prismaMock.categoria.findUnique).toHaveBeenCalledTimes(1);
+            expect(prismaMock.categoria.findUnique).toBeCalledWith({
+                where: {
+                    id: categoria.id
+                }
+            });
 
         });
 
@@ -60,13 +60,13 @@ describe('Repositório Prisma: Categoria', () => {
     describe('Recuperar Todas as Categorias', () => {
 
         test('Deve Recuperar Todas as Categorias Sem Execeção', async () => {
-		
+
             const listaCategoriasPrisma = [{
                 id: UUUIDValido,
                 nome: nomeCategoriaValido,
                 dataCriacao: dataCriacaoCategoria,
                 dataAtualizacao: dataAtualizacaoCategoria
-            },{
+            }, {
                 id: UUUIDValido,
                 nome: nomeCategoriaValido,
                 dataCriacao: dataCriacaoCategoria,
@@ -75,7 +75,7 @@ describe('Repositório Prisma: Categoria', () => {
 
             prismaMock.categoria.findMany.mockResolvedValue(listaCategoriasPrisma);
 
-            const categorias:Array<Categoria> = listaCategoriasPrisma.map(
+            const categorias: Array<Categoria> = listaCategoriasPrisma.map(
                 (categoria) => CategoriaMap.fromPrismaModelToDomain(categoria)
             );
 
@@ -85,13 +85,13 @@ describe('Repositório Prisma: Categoria', () => {
             expect(prismaMock.categoria.findMany).toHaveBeenCalledTimes(1);
 
 
-		});
+        });
 
     });
 
-	describe('Existe Categoria', () => {
+    describe('Existe Categoria', () => {
 
-		test('Deve Verificar se Existe Uma Determinada Categoria por UUID', async () => {
+        test('Deve Verificar se Existe Uma Determinada Categoria por UUID', async () => {
 
             const categoriaPrisma = {
                 id: UUUIDValido,
@@ -108,7 +108,7 @@ describe('Repositório Prisma: Categoria', () => {
 
         });
 
-	});
+    });
 
     describe('Inserir Categoria', () => {
 
@@ -117,7 +117,7 @@ describe('Repositório Prisma: Categoria', () => {
             const categoriaPrisma = {
                 id: UUUIDValido,
                 nome: nomeCategoriaValido,
-                dataCriacao:dataCriacaoCategoria,
+                dataCriacao: dataCriacaoCategoria,
                 dataAtualizacao: dataAtualizacaoCategoria
             };
 
@@ -126,16 +126,16 @@ describe('Repositório Prisma: Categoria', () => {
             const categoria: Categoria = CategoriaMap.toDomain(categoriaPrisma);
 
             const categoriaInserida = await categoriaRepositorio.inserir(categoria);
-    
+
             expect(categoriaInserida).toStrictEqual(categoria)
             expect(prismaMock.categoria.create).toHaveBeenCalledTimes(1);
-            expect(prismaMock.categoria.create).toBeCalledWith(  {
+            expect(prismaMock.categoria.create).toBeCalledWith({
                 data: {
                     id: categoria.id,
                     nome: categoria.nome
-                }    
-            });  
-              
+                }
+            });
+
 
         });
 
@@ -148,7 +148,7 @@ describe('Repositório Prisma: Categoria', () => {
             const categoriaPrisma = {
                 id: UUUIDValido,
                 nome: nomeCategoriaValido,
-                dataCriacao:dataCriacaoCategoria,
+                dataCriacao: dataCriacaoCategoria,
                 dataAtualizacao: dataAtualizacaoCategoria
             };
 
@@ -156,15 +156,15 @@ describe('Repositório Prisma: Categoria', () => {
 
             const categoria: Categoria = CategoriaMap.toDomain(categoriaPrisma);
 
-            const categoriaAtualizada = await categoriaRepositorio.atualizar(categoria.id,categoria);
-    
+            const categoriaAtualizada = await categoriaRepositorio.atualizar(categoria.id, categoria);
+
             expect(categoriaAtualizada).toBeTruthy()
             expect(prismaMock.categoria.update).toHaveBeenCalledTimes(1);
             expect(prismaMock.categoria.update).toBeCalledWith({
-                where: {id : categoria.id},
+                where: { id: categoria.id },
                 data: categoriaPrisma
-            });  
-              
+            });
+
 
         });
 
@@ -177,7 +177,7 @@ describe('Repositório Prisma: Categoria', () => {
             const categoriaPrisma = {
                 id: UUUIDValido,
                 nome: nomeCategoriaValido,
-                dataCriacao:dataCriacaoCategoria,
+                dataCriacao: dataCriacaoCategoria,
                 dataAtualizacao: dataAtualizacaoCategoria
             };
 
@@ -186,15 +186,15 @@ describe('Repositório Prisma: Categoria', () => {
             const categoria: Categoria = CategoriaMap.toDomain(categoriaPrisma);
 
             const categoriaDeletada = await categoriaRepositorio.deletar(categoria.id);
-    
+
             expect(categoriaDeletada).toBeTruthy();
             expect(prismaMock.categoria.delete).toHaveBeenCalledTimes(1);
             expect(prismaMock.categoria.delete).toBeCalledWith({
-                where: {id : categoria.id}
-            });  
-              
+                where: { id: categoria.id }
+            });
+
 
         });
 
-    })
+    });
 });

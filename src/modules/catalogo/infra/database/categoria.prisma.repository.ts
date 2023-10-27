@@ -49,22 +49,22 @@ class CategoriaPrismaRepository extends PrismaRepository implements ICategoriaRe
     async atualizar(uuid: string, categoria: Categoria): Promise<boolean> {
         const categoriaAtualizada = await this._datasource.categoria.update(
             {
-                where: {id: uuid},
+                where: { id: uuid },
                 data: CategoriaMap.toDTO(categoria)
             }
         );
-        if (categoriaAtualizada) {return true}
+        if (categoriaAtualizada) { return true }
         return false;
     }
 
     async deletar(uuid: string): Promise<boolean> {
         const categoriaDeletada = await this._datasource.categoria.delete(
             {
-                where: {id: uuid}
-        
+                where: { id: uuid }
+
             }
         );
-        if (categoriaDeletada.id) {return true}
+        if (categoriaDeletada.id) { return true }
         return false;
     }
 
