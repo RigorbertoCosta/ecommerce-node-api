@@ -7,6 +7,7 @@ import { error, info, log } from "console";
 import { Produto } from "@modules/catalogo/domain/produto/produto.enitity";
 import { categoriaRepositorio as categoriaRepo} from "@modules/catalogo/infra/database";
 import { produtoRepositorios as produtoRepo } from "@modules/catalogo/infra/database";
+import { recuperarCategoriaPorIdUseCase } from "@modules/catalogo/application/use-case";
 
 async function main() {
     
@@ -25,6 +26,12 @@ async function main() {
     //const categoriaRecuperada: Categoria | null = await categoriaRepo.recuperarPorUuid('5ccdd6ab-d043-42f0-937b-1260fe47886a');
 
     //console.log(categoriaRecuperada);
+
+    ////////////////////////////////
+    //Recuperar Categoria por UUID 2//
+    ////////////////////////////////
+   
+    console.log(await recuperarCategoriaPorIdUseCase.execute("6aa136db-c181-46e8-8fc1-f052a13f6f0d"));
 
     /////////////////////////////////
     //Recuperar Todas as Categorias//

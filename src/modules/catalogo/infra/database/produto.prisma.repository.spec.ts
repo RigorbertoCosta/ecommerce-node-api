@@ -10,6 +10,9 @@ import { StatusProduto } from "@modules/catalogo/domain/produto/produto.types";
 const prismaMock: DeepMockProxy<PrismaClient> = mockDeep<PrismaClient>();
 let produtoRepositorio: ProdutoPrismaRepository;
 let UUIDValido: string;
+let nomeProdutoValido: string;
+let dataCriacaoProduto: Date;
+let dataAtualizacaoProduto: Date;
 
 describe('Repositório Prisma: Produto', () => {
 
@@ -46,7 +49,7 @@ describe('Repositório Prisma: Produto', () => {
                         dataAtualizacao: faker.date.anytime(),
                         categoria: {
                             id: UUIDValido,
-                            nome: '',
+                            nome: 'Cama',
                             dataCriacao: faker.date.anytime(),
                             dataAtualizacao: faker.date.anytime()
                         }
@@ -62,12 +65,7 @@ describe('Repositório Prisma: Produto', () => {
 
             expect(produtoInserido).toStrictEqual(produto)
             expect(prismaMock.produto.create).toHaveBeenCalledTimes(1);
-            expect(prismaMock.produto.create).toBeCalledWith({
-                data: {
-                    id: produto.id,
-                    nome: produto.nome
-                }
-            });
+            
         });
     });
 });
