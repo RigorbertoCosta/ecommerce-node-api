@@ -3,8 +3,8 @@ import { RecuperarCategoriaPorIdUseCase } from "./recuperar-categoria-por-id/rec
 import { RecuperarTodasCategoriasUseCase } from "./recuperar-todas-categorias/recupearar-todas-categorias.use-case";
 
 const recuperarCategoriaPorIdUseCase = new RecuperarCategoriaPorIdUseCase(categoriaRepositorio); 
-const RecuperarTodasCategorias = new RecuperarTodasCategoriasUseCase(categoriaRepositorio);
+const recuperarTodasCategorias = new RecuperarTodasCategoriasUseCase(categoriaRepositorio);
 
 export { recuperarCategoriaPorIdUseCase, 
-         RecuperarTodasCategorias
+         recuperarTodasCategorias
          }

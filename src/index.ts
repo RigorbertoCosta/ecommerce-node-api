@@ -7,8 +7,7 @@ import { error, info, log } from "console";
 import { Produto } from "@modules/catalogo/domain/produto/produto.enitity";
 import { categoriaRepositorio as categoriaRepo} from "@modules/catalogo/infra/database";
 import { produtoRepositorios as produtoRepo } from "@modules/catalogo/infra/database";
-import { RecuperarTodasCategorias, recuperarCategoriaPorIdUseCase } from "@modules/catalogo/application/use-case";
-import { RecuperarTodasCategoriasUseCase } from "@modules/catalogo/application/use-case/recuperar-todas-categorias/recupearar-todas-categorias.use-case";
+import { recuperarTodasCategorias } from "@modules/catalogo/application/use-case";
 
 async function main() {
     
@@ -42,7 +41,7 @@ async function main() {
 
     //console.log(todasCategorias);
 
-    console.log(await RecuperarTodasCategoriasUseCase.execute());
+    console.log(await recuperarTodasCategorias.execute());
 
     ////////////////////////////////
     //Verifica se Existe Categoria//
