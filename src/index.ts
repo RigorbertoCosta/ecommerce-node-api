@@ -7,7 +7,7 @@ import { error, info, log } from "console";
 import { Produto } from "@modules/catalogo/domain/produto/produto.enitity";
 import { categoriaRepositorio as categoriaRepo} from "@modules/catalogo/infra/database";
 import { produtoRepositorios as produtoRepo } from "@modules/catalogo/infra/database";
-import { recuperarTodasCategorias } from "@modules/catalogo/application/use-case";
+import { deletarCategoriaUseCase, recuperarTodasCategorias } from "@modules/catalogo/application/use-case";
 
 async function main() {
     
@@ -41,7 +41,7 @@ async function main() {
 
     //console.log(todasCategorias);
 
-    console.log(await recuperarTodasCategorias.execute());
+    //console.log(await recuperarTodasCategorias.execute());
 
     ////////////////////////////////
     //Verifica se Existe Categoria//
@@ -83,6 +83,12 @@ async function main() {
     //const categoriaDeletada: boolean = await categoriaRepo.deletar('5ccdd6ab-d043-42f0-937b-1260fe47886a');
     
     //console.log(categoriaDeletada);
+
+       /////////////////////
+    //Deletar Categoria//
+    /////////////////////
+   
+    // console.log(await deletarCategoriaUseCase.execute("55acc0f4-45ec-4f97-8087-4763a7893c54"));
 
     ////////////////////////////////
 	//Recuperar Produto por UUID//
