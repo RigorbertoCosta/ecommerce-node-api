@@ -7,7 +7,8 @@ import { error, info, log } from "console";
 import { Produto } from "@modules/catalogo/domain/produto/produto.enitity";
 import { categoriaRepositorio as categoriaRepo} from "@modules/catalogo/infra/database";
 import { produtoRepositorios as produtoRepo } from "@modules/catalogo/infra/database";
-import { recuperarCategoriaPorIdUseCase } from "@modules/catalogo/application/use-case";
+import { RecuperarTodasCategorias, recuperarCategoriaPorIdUseCase } from "@modules/catalogo/application/use-case";
+import { RecuperarTodasCategoriasUseCase } from "@modules/catalogo/application/use-case/recuperar-todas-categorias/recupearar-todas-categorias.use-case";
 
 async function main() {
     
@@ -31,7 +32,7 @@ async function main() {
     //Recuperar Categoria por UUID 2//
     ////////////////////////////////
    
-    console.log(await recuperarCategoriaPorIdUseCase.execute("6aa136db-c181-46e8-8fc1-f052a13f6f0d"));
+    //console.log(await recuperarCategoriaPorIdUseCase.execute("6aa136db-c181-46e8-8fc1-f052a13f6f0d"));
 
     /////////////////////////////////
     //Recuperar Todas as Categorias//
@@ -40,6 +41,8 @@ async function main() {
     //const todasCategorias: Array<Categoria> = await categoriaRepo.recuperarTodos();
 
     //console.log(todasCategorias);
+
+    console.log(await RecuperarTodasCategoriasUseCase.execute());
 
     ////////////////////////////////
     //Verifica se Existe Categoria//
