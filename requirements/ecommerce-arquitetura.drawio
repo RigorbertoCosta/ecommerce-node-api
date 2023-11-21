@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="foyhW6rIAd-1MIi7OwMy" name="Arquitetura em Camadas">
-        <mxGraphModel dx="1327" dy="792" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+        <mxGraphModel dx="1479" dy="811" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -11,7 +11,7 @@
                     <mxGeometry x="40" y="20" width="760" height="130" as="geometry"/>
                 </mxCell>
                 <mxCell id="6" value="" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;strokeWidth=2;gradientColor=default;" parent="1" vertex="1">
-                    <mxGeometry x="220" y="680" width="390" height="120" as="geometry"/>
+                    <mxGeometry x="270" y="680" width="310" height="120" as="geometry"/>
                 </mxCell>
                 <mxCell id="8" value="" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=2;fillColor=#FF6666;glass=0;shadow=0;gradientColor=none;points=[[0,0,0,0,0],[0,0.24,0,0,0],[0,0.5,0,0,0],[0,0.76,0,0,0],[0,1,0,0,0],[0.06,0,0,0,-2],[0.07,1,0,0,2],[0.5,0,0,0,0],[0.5,1,0,0,0],[0.75,0,0,0,0],[0.75,1,0,0,0],[1,0,0,0,0],[1,0.26,0,0,0],[1,0.5,0,0,0],[1,0.76,0,0,0],[1,1,0,0,0]];" parent="1" vertex="1">
                     <mxGeometry x="160" y="450" width="470" height="70" as="geometry"/>
@@ -100,17 +100,17 @@
                     <mxGeometry x="141" y="370" width="200" height="30" as="geometry"/>
                 </mxCell>
                 <mxCell id="7" value="Database (Relacional)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;strokeWidth=2;" parent="1" vertex="1">
-                    <mxGeometry x="355" y="710" width="130" height="30" as="geometry"/>
+                    <mxGeometry x="360" y="710" width="130" height="30" as="geometry"/>
                 </mxCell>
                 <mxCell id="vnrxRwkXlKYGSwpxd45I-61" value="" style="curved=1;endArrow=classic;html=1;strokeColor=#0000FF;strokeWidth=2;fontColor=#000000;entryX=0.041;entryY=0.592;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" edge="1">
                     <mxGeometry width="50" height="50" relative="1" as="geometry">
-                        <mxPoint x="380" y="241.05" as="sourcePoint"/>
-                        <mxPoint x="325.08000000000004" y="231.05" as="targetPoint"/>
+                        <mxPoint x="460" y="241.04000000000002" as="sourcePoint"/>
+                        <mxPoint x="405.08000000000004" y="231.04000000000002" as="targetPoint"/>
                         <Array as="points">
-                            <mxPoint x="380" y="271.05"/>
-                            <mxPoint x="390" y="401.05"/>
-                            <mxPoint x="350" y="710.9599999999999"/>
-                            <mxPoint x="300" y="350.96000000000004"/>
+                            <mxPoint x="460" y="271.04"/>
+                            <mxPoint x="470" y="401.04"/>
+                            <mxPoint x="430" y="710.9499999999999"/>
+                            <mxPoint x="380" y="350.95000000000005"/>
                         </Array>
                     </mxGeometry>
                 </mxCell>
