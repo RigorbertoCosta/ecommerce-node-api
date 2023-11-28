@@ -7,7 +7,7 @@ import { DeletarCategoriaUseCase } from "./deletar-categoria/deletar-categoria.u
 import { RecuperarProdutoPorIdUseCase } from "./recuperar-produto-por-id/recuperar-produto-por-id.use-case";
 
 const recuperarCategoriaPorIdUseCase = new RecuperarCategoriaPorIdUseCase(categoriaRepositorio); 
-const recuperarTodasCategorias = new RecuperarTodasCategoriasUseCase(categoriaRepositorio);
+const recuperarTodasCategoriasUseCase = new RecuperarTodasCategoriasUseCase(categoriaRepositorio);
 const inserirCategoriaUseCase = new InserirCategoriaUseCase(categoriaRepositorio);
 const atualizarCategoriaUseCase = new AtualizarCategoriaUseCase(categoriaRepositorio);
 const deletarCategoriaUseCase = new DeletarCategoriaUseCase(categoriaRepositorio);
@@ -15,7 +15,7 @@ const deletarCategoriaUseCase = new DeletarCategoriaUseCase(categoriaRepositorio
 const recuperarProdutoPorIdUseCase = new RecuperarProdutoPorIdUseCase(produtoRepositorios);
 
 export { recuperarCategoriaPorIdUseCase, 
-         recuperarTodasCategorias,
+         recuperarTodasCategoriasUseCase,
          inserirCategoriaUseCase,
          atualizarCategoriaUseCase,
          deletarCategoriaUseCase,
